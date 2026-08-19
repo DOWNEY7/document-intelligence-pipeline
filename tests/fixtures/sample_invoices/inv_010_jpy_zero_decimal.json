@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "fixture_id": "INV-010",
+    "filename": "inv_010_jpy_zero_decimal.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "Zero-decimal currency formatting (JPY), line items with software subscription",
+    "test_tags": [
+      "zero_decimal",
+      "jpy",
+      "software_subscription",
+      "tier1",
+      "tier2"
+    ],
+    "file_sha256": "420b41d1227126dfef4805064d20dddfc794dbc3834ef33144a33f9705ca59b1",
+    "file_size_bytes": 2807
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Slack Technologies LLC",
+      "confidence": 0.98,
+      "raw_text": "Slack Technologies LLC"
+    },
+    "vendor_address": {
+      "value": "500 Howard St, San Francisco, CA 94105",
+      "confidence": 0.95,
+      "raw_text": "500 Howard St, San Francisco, CA 94105"
+    },
+    "customer_name": {
+      "value": "Contoso Japan K.K.",
+      "confidence": 0.96,
+      "raw_text": "Contoso Japan K.K."
+    },
+    "invoice_id": {
+      "value": "SLACK-INV-2026-904",
+      "confidence": 0.98,
+      "raw_text": "SLACK-INV-2026-904"
+    },
+    "invoice_date": {
+      "value": "2026-08-15",
+      "confidence": 0.99,
+      "raw_text": "2026-08-15"
+    },
+    "due_date": {
+      "value": "2026-09-14",
+      "confidence": 0.97,
+      "raw_text": "2026-09-14"
+    },
+    "currency": {
+      "value": "JPY",
+      "symbol": "¥",
+      "confidence": 0.99,
+      "raw_text": "¥"
+    },
+    "subtotal": {
+      "value": 150000.0,
+      "confidence": 0.98,
+      "raw_text": "¥150,000"
+    },
+    "total_tax": {
+      "value": 0.0,
+      "confidence": 0.95,
+      "raw_text": "¥0"
+    },
+    "invoice_total": {
+      "value": 150000.0,
+      "confidence": 0.99,
+      "raw_text": "¥150,000"
+    },
+    "amount_due": {
+      "value": 150000.0,
+      "confidence": 0.98,
+      "raw_text": "¥150,000"
+    },
+    "line_items": [
+      {
+        "description": "Slack Enterprise Grid Subscription (10 user seats @ ¥15,000/seat)",
+        "quantity": 10.0,
+        "unit_price": 15000.0,
+        "amount": 150000.0,
+        "confidence": 0.98
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Slack Technologies LLC",
+    "vendor_canonical": "Slack Technologies",
+    "vendor_id": "VEND-SLACK-001",
+    "vendor_match_score": 95.0,
+    "is_known_vendor": true,
+    "invoice_number": "SLACK-INV-2026-904",
+    "invoice_date": "2026-08-15",
+    "due_date": "2026-09-14",
+    "currency_raw": "¥",
+    "currency_iso": "JPY",
+    "subtotal": 150000.0,
+    "tax_amount": 0.0,
+    "total_amount": 150000.0,
+    "amount_due": 150000.0,
+    "spend_category": "Software Subscriptions",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Slack Enterprise Grid Subscription (10 user seats @ ¥15,000/seat)",
+        "quantity": 10.0,
+        "unit_price": 15000.0,
+        "total_price": 150000.0,
+        "category": "Software Subscriptions"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.0
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Slack Technologies",
+    "exact_currency_iso": "JPY",
+    "exact_invoice_date": "2026-08-15",
+    "exact_total_amount": 150000.0,
+    "exact_spend_category": "Software Subscriptions",
+    "min_line_items_count": 1,
+    "is_duplicate": false,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}

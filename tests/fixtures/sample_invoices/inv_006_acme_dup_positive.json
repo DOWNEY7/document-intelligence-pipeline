@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "fixture_id": "INV-006",
+    "filename": "inv_006_acme_dup_positive.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "Positive duplicate (+3 days from INV-005, same canonical vendor & amount)",
+    "test_tags": [
+      "duplicate_positive",
+      "acme",
+      "sliding_window_3d",
+      "tier1",
+      "tier2",
+      "tier4"
+    ],
+    "file_sha256": "21fccf8a1a0a76fa3bef541af4c6a40f1e2f6e2559fbd6989d7761090cbfe5db",
+    "file_size_bytes": 3007
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Acme Corporation LLC",
+      "confidence": 0.98,
+      "raw_text": "Acme Corporation LLC"
+    },
+    "vendor_address": {
+      "value": "123 Industrial Parkway, Springfield, IL 62701",
+      "confidence": 0.94,
+      "raw_text": "123 Industrial Parkway, Springfield, IL 62701"
+    },
+    "customer_name": {
+      "value": "Contoso Global Enterprises",
+      "confidence": 0.96,
+      "raw_text": "Contoso Global Enterprises"
+    },
+    "invoice_id": {
+      "value": "ACM-2026-0501-DUP",
+      "confidence": 0.98,
+      "raw_text": "ACM-2026-0501-DUP"
+    },
+    "invoice_date": {
+      "value": "2026-08-13",
+      "confidence": 0.99,
+      "raw_text": "2026-08-13"
+    },
+    "due_date": {
+      "value": "2026-09-12",
+      "confidence": 0.97,
+      "raw_text": "2026-09-12"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.99,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 500.0,
+      "confidence": 0.98,
+      "raw_text": "$500.00"
+    },
+    "total_tax": {
+      "value": 0.0,
+      "confidence": 0.95,
+      "raw_text": "$0.00"
+    },
+    "invoice_total": {
+      "value": 500.0,
+      "confidence": 0.99,
+      "raw_text": "$500.00"
+    },
+    "amount_due": {
+      "value": 500.0,
+      "confidence": 0.98,
+      "raw_text": "$500.00"
+    },
+    "line_items": [
+      {
+        "description": "Industrial Precision Heavy-Duty Widget Model A (Replacement Delivery)",
+        "quantity": 5.0,
+        "unit_price": 100.0,
+        "amount": 500.0,
+        "confidence": 0.98
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Acme Corporation LLC",
+    "vendor_canonical": "Acme Corporation",
+    "vendor_id": "VEND-ACME-001",
+    "vendor_match_score": 96.0,
+    "is_known_vendor": true,
+    "invoice_number": "ACM-2026-0501-DUP",
+    "invoice_date": "2026-08-13",
+    "due_date": "2026-09-12",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 500.0,
+    "tax_amount": 0.0,
+    "total_amount": 500.0,
+    "amount_due": 500.0,
+    "spend_category": "Office Supplies & Equipment",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Industrial Precision Heavy-Duty Widget Model A (Replacement Delivery)",
+        "quantity": 5.0,
+        "unit_price": 100.0,
+        "total_price": 500.0,
+        "category": "Office Supplies & Equipment"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": true,
+    "duplicate_of_id": "INV-005",
+    "duplicate_reason": "Duplicate detected: Matches existing invoice INV-005 with identical canonical vendor ('Acme Corporation') and amount ($500.00) within 7 days (date delta: 3 days).",
+    "duplicate_match_details": {
+      "original_invoice_id": "INV-005",
+      "original_date": "2026-08-10",
+      "days_difference": 3,
+      "vendor_matched": "Acme Corporation",
+      "amount_matched": 500.0
+    },
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.85
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Acme Corporation",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-08-13",
+    "exact_total_amount": 500.0,
+    "exact_spend_category": "Office Supplies & Equipment",
+    "min_line_items_count": 1,
+    "is_duplicate": true,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}

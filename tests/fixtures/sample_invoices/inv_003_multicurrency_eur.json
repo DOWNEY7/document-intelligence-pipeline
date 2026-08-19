@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "fixture_id": "INV-003",
+    "filename": "inv_003_multicurrency_eur.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "European formatting (comma decimal, EUR currency symbol)",
+    "test_tags": [
+      "multicurrency",
+      "eur",
+      "comma_decimal",
+      "vat",
+      "tier1",
+      "tier2"
+    ],
+    "file_sha256": "a246436069363cdaf7feecf9fbbb07bb55f648419e6375222e6b50e35fefdbde",
+    "file_size_bytes": 2923
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Google Ireland Limited",
+      "confidence": 0.98,
+      "raw_text": "Google Ireland Limited"
+    },
+    "vendor_address": {
+      "value": "Gordon House, Barrow Street, Dublin 4, Ireland",
+      "confidence": 0.95,
+      "raw_text": "Gordon House, Barrow Street, Dublin 4, Ireland"
+    },
+    "customer_name": {
+      "value": "Contoso European Branch B.V.",
+      "confidence": 0.96,
+      "raw_text": "Contoso European Branch B.V."
+    },
+    "invoice_id": {
+      "value": "GCP-EU-2026-771",
+      "confidence": 0.98,
+      "raw_text": "GCP-EU-2026-771"
+    },
+    "invoice_date": {
+      "value": "2026-08-05",
+      "confidence": 0.97,
+      "raw_text": "05/08/2026"
+    },
+    "due_date": {
+      "value": "2026-09-04",
+      "confidence": 0.96,
+      "raw_text": "04/09/2026"
+    },
+    "currency": {
+      "value": "EUR",
+      "symbol": "€",
+      "confidence": 0.99,
+      "raw_text": "€"
+    },
+    "subtotal": {
+      "value": 1980.75,
+      "confidence": 0.97,
+      "raw_text": "1.980,75 €"
+    },
+    "total_tax": {
+      "value": 200.0,
+      "confidence": 0.96,
+      "raw_text": "200,00 €"
+    },
+    "invoice_total": {
+      "value": 2180.75,
+      "confidence": 0.98,
+      "raw_text": "2.180,75 €"
+    },
+    "amount_due": {
+      "value": 2180.75,
+      "confidence": 0.97,
+      "raw_text": "2.180,75 €"
+    },
+    "line_items": [
+      {
+        "description": "Google Cloud Platform - Compute Engine n2-standard-8",
+        "quantity": 1.0,
+        "unit_price": 1800.0,
+        "amount": 1800.0,
+        "confidence": 0.97
+      },
+      {
+        "description": "Google Cloud Storage - Multi-Regional EU",
+        "quantity": 1.0,
+        "unit_price": 180.75,
+        "amount": 180.75,
+        "confidence": 0.96
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Google Ireland Limited",
+    "vendor_canonical": "Google LLC",
+    "vendor_id": "VEND-GOOG-001",
+    "vendor_match_score": 88.0,
+    "is_known_vendor": true,
+    "invoice_number": "GCP-EU-2026-771",
+    "invoice_date": "2026-08-05",
+    "due_date": "2026-09-04",
+    "currency_raw": "€",
+    "currency_iso": "EUR",
+    "subtotal": 1980.75,
+    "tax_amount": 200.0,
+    "total_amount": 2180.75,
+    "amount_due": 2180.75,
+    "spend_category": "Cloud Services",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Google Cloud Platform - Compute Engine n2-standard-8",
+        "quantity": 1.0,
+        "unit_price": 1800.0,
+        "total_price": 1800.0,
+        "category": "Cloud Services"
+      },
+      {
+        "item_id": "item_2",
+        "description": "Google Cloud Storage - Multi-Regional EU",
+        "quantity": 1.0,
+        "unit_price": 180.75,
+        "total_price": 180.75,
+        "category": "Cloud Services"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.0
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Google LLC",
+    "exact_currency_iso": "EUR",
+    "exact_invoice_date": "2026-08-05",
+    "exact_total_amount": 2180.75,
+    "exact_spend_category": "Cloud Services",
+    "min_line_items_count": 2,
+    "is_duplicate": false,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}

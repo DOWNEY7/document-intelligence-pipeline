@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "fixture_id": "INV-001",
+    "filename": "inv_001_standard_aws.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "Clean standard multi-item cloud hosting invoice with tax & subtotal",
+    "test_tags": [
+      "standard",
+      "cloud_hosting",
+      "multi_item",
+      "tax_subtotal",
+      "tier1",
+      "tier4"
+    ],
+    "file_sha256": "bff2dc0915ac1589a32eaec84128e6a8b64e8a58277ef95a3b6aec9bdb2455d4",
+    "file_size_bytes": 3018
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Amazon Web Services Inc.",
+      "confidence": 0.99,
+      "raw_text": "Amazon Web Services Inc."
+    },
+    "vendor_address": {
+      "value": "410 Terry Ave N, Seattle, WA 98109, USA",
+      "confidence": 0.95,
+      "raw_text": "410 Terry Ave N, Seattle, WA 98109, USA"
+    },
+    "customer_name": {
+      "value": "Contoso Global Enterprises",
+      "confidence": 0.96,
+      "raw_text": "Contoso Global Enterprises"
+    },
+    "invoice_id": {
+      "value": "INV-AWS-2026-0881",
+      "confidence": 0.98,
+      "raw_text": "INV-AWS-2026-0881"
+    },
+    "invoice_date": {
+      "value": "2026-08-01",
+      "confidence": 0.99,
+      "raw_text": "2026-08-01"
+    },
+    "due_date": {
+      "value": "2026-08-31",
+      "confidence": 0.97,
+      "raw_text": "2026-08-31"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.99,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 1320.5,
+      "confidence": 0.98,
+      "raw_text": "$1,320.50"
+    },
+    "total_tax": {
+      "value": 100.0,
+      "confidence": 0.98,
+      "raw_text": "$100.00"
+    },
+    "invoice_total": {
+      "value": 1420.5,
+      "confidence": 0.99,
+      "raw_text": "$1,420.50"
+    },
+    "amount_due": {
+      "value": 1420.5,
+      "confidence": 0.98,
+      "raw_text": "$1,420.50"
+    },
+    "line_items": [
+      {
+        "description": "Amazon Elastic Compute Cloud (EC2) - Production Instances",
+        "quantity": 1.0,
+        "unit_price": 850.0,
+        "amount": 850.0,
+        "confidence": 0.98
+      },
+      {
+        "description": "Amazon Simple Storage Service (S3) - Standard Storage",
+        "quantity": 1.0,
+        "unit_price": 220.5,
+        "amount": 220.5,
+        "confidence": 0.97
+      },
+      {
+        "description": "AWS Direct Connect & Regional Data Transfer",
+        "quantity": 1.0,
+        "unit_price": 250.0,
+        "amount": 250.0,
+        "confidence": 0.98
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Amazon Web Services Inc.",
+    "vendor_canonical": "Amazon Web Services",
+    "vendor_id": "VEND-AWS-001",
+    "vendor_match_score": 95.0,
+    "is_known_vendor": true,
+    "invoice_number": "INV-AWS-2026-0881",
+    "invoice_date": "2026-08-01",
+    "due_date": "2026-08-31",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 1320.5,
+    "tax_amount": 100.0,
+    "total_amount": 1420.5,
+    "amount_due": 1420.5,
+    "spend_category": "Cloud Services",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Amazon Elastic Compute Cloud (EC2) - Production Instances",
+        "quantity": 1.0,
+        "unit_price": 850.0,
+        "total_price": 850.0,
+        "category": "Cloud Services"
+      },
+      {
+        "item_id": "item_2",
+        "description": "Amazon Simple Storage Service (S3) - Standard Storage",
+        "quantity": 1.0,
+        "unit_price": 220.5,
+        "total_price": 220.5,
+        "category": "Cloud Services"
+      },
+      {
+        "item_id": "item_3",
+        "description": "AWS Direct Connect & Regional Data Transfer",
+        "quantity": 1.0,
+        "unit_price": 250.0,
+        "total_price": 250.0,
+        "category": "Cloud Services"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.0
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Amazon Web Services",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-08-01",
+    "exact_total_amount": 1420.5,
+    "exact_spend_category": "Cloud Services",
+    "min_line_items_count": 3,
+    "is_duplicate": false,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}

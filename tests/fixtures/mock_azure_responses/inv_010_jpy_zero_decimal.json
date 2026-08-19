@@ -1,0 +1,321 @@
+{
+  "apiVersion": "2024-02-29-preview",
+  "modelId": "prebuilt-invoice",
+  "stringIndexType": "textElements",
+  "content": "INVOICE\nVendor: Slack Technologies LLC\nInvoice Number: SLACK-INV-2026-904\nInvoice Date: 2026-08-15\nTotal Amount: \u00a5150,000\nDocument: inv_010_jpy_zero_decimal.pdf (INV-010)\n",
+  "pages": [
+    {
+      "pageNumber": 1,
+      "angle": 0.0,
+      "width": 8.5,
+      "height": 11.0,
+      "unit": "inch",
+      "spans": [
+        {
+          "offset": 0,
+          "length": 171
+        }
+      ]
+    }
+  ],
+  "tables": [],
+  "documents": [
+    {
+      "docType": "invoice",
+      "boundingRegions": [
+        {
+          "pageNumber": 1,
+          "polygon": [
+            0.5,
+            0.5,
+            8.0,
+            0.5,
+            8.0,
+            10.5,
+            0.5,
+            10.5
+          ]
+        }
+      ],
+      "confidence": 0.98,
+      "spans": [
+        {
+          "offset": 0,
+          "length": 171
+        }
+      ],
+      "fields": {
+        "VendorName": {
+          "type": "string",
+          "valueString": "Slack Technologies LLC",
+          "content": "Slack Technologies LLC",
+          "confidence": 0.98,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                0.5,
+                1.0,
+                3.5,
+                1.0,
+                3.5,
+                1.3,
+                0.5,
+                1.3
+              ]
+            }
+          ]
+        },
+        "VendorAddress": {
+          "type": "string",
+          "valueString": "500 Howard St, San Francisco, CA 94105",
+          "content": "500 Howard St, San Francisco, CA 94105",
+          "confidence": 0.95,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                0.5,
+                1.4,
+                4.0,
+                1.4,
+                4.0,
+                1.7,
+                0.5,
+                1.7
+              ]
+            }
+          ]
+        },
+        "CustomerName": {
+          "type": "string",
+          "valueString": "Contoso Japan K.K.",
+          "content": "Contoso Japan K.K.",
+          "confidence": 0.96,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                5.0,
+                1.0,
+                8.0,
+                1.0,
+                8.0,
+                1.3,
+                5.0,
+                1.3
+              ]
+            }
+          ]
+        },
+        "InvoiceId": {
+          "type": "string",
+          "valueString": "SLACK-INV-2026-904",
+          "content": "SLACK-INV-2026-904",
+          "confidence": 0.98,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                5.0,
+                1.4,
+                7.5,
+                1.4,
+                7.5,
+                1.7,
+                5.0,
+                1.7
+              ]
+            }
+          ]
+        },
+        "InvoiceDate": {
+          "type": "date",
+          "valueDate": "2026-08-15",
+          "content": "2026-08-15",
+          "confidence": 0.99,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                5.0,
+                1.8,
+                7.0,
+                1.8,
+                7.0,
+                2.0,
+                5.0,
+                2.0
+              ]
+            }
+          ]
+        },
+        "DueDate": {
+          "type": "date",
+          "valueDate": "2026-09-14",
+          "content": "2026-09-14",
+          "confidence": 0.97,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                5.0,
+                2.1,
+                7.0,
+                2.1,
+                7.0,
+                2.3,
+                5.0,
+                2.3
+              ]
+            }
+          ]
+        },
+        "SubTotal": {
+          "type": "currency",
+          "valueCurrency": {
+            "amount": 150000.0,
+            "currencySymbol": "\u00a5",
+            "currencyCode": "JPY"
+          },
+          "content": "\u00a5150,000",
+          "confidence": 0.98,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                6.0,
+                7.0,
+                7.8,
+                7.0,
+                7.8,
+                7.3,
+                6.0,
+                7.3
+              ]
+            }
+          ]
+        },
+        "TotalTax": {
+          "type": "currency",
+          "valueCurrency": {
+            "amount": 0.0,
+            "currencySymbol": "\u00a5",
+            "currencyCode": "JPY"
+          },
+          "content": "\u00a50",
+          "confidence": 0.95,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                6.0,
+                7.4,
+                7.8,
+                7.4,
+                7.8,
+                7.7,
+                6.0,
+                7.7
+              ]
+            }
+          ]
+        },
+        "InvoiceTotal": {
+          "type": "currency",
+          "valueCurrency": {
+            "amount": 150000.0,
+            "currencySymbol": "\u00a5",
+            "currencyCode": "JPY"
+          },
+          "content": "\u00a5150,000",
+          "confidence": 0.99,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                6.0,
+                7.8,
+                7.8,
+                7.8,
+                7.8,
+                8.2,
+                6.0,
+                8.2
+              ]
+            }
+          ]
+        },
+        "AmountDue": {
+          "type": "currency",
+          "valueCurrency": {
+            "amount": 150000.0,
+            "currencySymbol": "\u00a5",
+            "currencyCode": "JPY"
+          },
+          "content": "\u00a5150,000",
+          "confidence": 0.98,
+          "boundingRegions": [
+            {
+              "pageNumber": 1,
+              "polygon": [
+                6.0,
+                8.3,
+                7.8,
+                8.3,
+                7.8,
+                8.6,
+                6.0,
+                8.6
+              ]
+            }
+          ]
+        },
+        "Items": {
+          "type": "array",
+          "valueArray": [
+            {
+              "type": "object",
+              "valueObject": {
+                "Description": {
+                  "type": "string",
+                  "valueString": "Slack Enterprise Grid Subscription (10 user seats @ \u00a515,000/seat)",
+                  "content": "Slack Enterprise Grid Subscription (10 user seats @ \u00a515,000/seat)",
+                  "confidence": 0.98
+                },
+                "Quantity": {
+                  "type": "number",
+                  "valueNumber": 10.0,
+                  "content": "10.0",
+                  "confidence": 0.98
+                },
+                "UnitPrice": {
+                  "type": "currency",
+                  "valueCurrency": {
+                    "amount": 15000.0,
+                    "currencySymbol": "\u00a5",
+                    "currencyCode": "JPY"
+                  },
+                  "content": "\u00a515000.0",
+                  "confidence": 0.98
+                },
+                "Amount": {
+                  "type": "currency",
+                  "valueCurrency": {
+                    "amount": 150000.0,
+                    "currencySymbol": "\u00a5",
+                    "currencyCode": "JPY"
+                  },
+                  "content": "\u00a5150000.0",
+                  "confidence": 0.98
+                }
+              },
+              "confidence": 0.98
+            }
+          ],
+          "confidence": 0.98
+        }
+      }
+    }
+  ]
+}

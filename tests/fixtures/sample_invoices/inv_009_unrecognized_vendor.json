@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "fixture_id": "INV-009",
+    "filename": "inv_009_unrecognized_vendor.jpg",
+    "file_format": "jpg",
+    "mime_type": "image/jpeg",
+    "document_type": "receipt",
+    "description": "JPG photo receipt from unknown vendor (< 70% fuzzy match threshold)",
+    "test_tags": [
+      "anomaly",
+      "unrecognized_vendor",
+      "catering",
+      "jpg_image",
+      "tier1",
+      "tier3"
+    ],
+    "file_sha256": "5693c9d1bbbf93423b63f6c5b4be108ea82ab131fa53bbfefb16f36823423816",
+    "file_size_bytes": 34744
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Luigi's Pizza & Catering",
+      "confidence": 0.91,
+      "raw_text": "Luigi's Pizza & Catering"
+    },
+    "vendor_address": {
+      "value": "88 Little Italy Way, New York, NY 10013",
+      "confidence": 0.89,
+      "raw_text": "88 Little Italy Way, New York, NY 10013"
+    },
+    "customer_name": {
+      "value": "Contoso Engineering Team",
+      "confidence": 0.92,
+      "raw_text": "Contoso Engineering Team"
+    },
+    "invoice_id": {
+      "value": "REC-LUI-44810",
+      "confidence": 0.95,
+      "raw_text": "REC-LUI-44810"
+    },
+    "invoice_date": {
+      "value": "2026-08-14",
+      "confidence": 0.96,
+      "raw_text": "2026-08-14"
+    },
+    "due_date": {
+      "value": "2026-08-14",
+      "confidence": 0.95,
+      "raw_text": "2026-08-14"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.98,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 79.5,
+      "confidence": 0.94,
+      "raw_text": "$79.50"
+    },
+    "total_tax": {
+      "value": 6.0,
+      "confidence": 0.93,
+      "raw_text": "$6.00"
+    },
+    "invoice_total": {
+      "value": 85.5,
+      "confidence": 0.97,
+      "raw_text": "$85.50"
+    },
+    "amount_due": {
+      "value": 85.5,
+      "confidence": 0.96,
+      "raw_text": "$85.50"
+    },
+    "line_items": [
+      {
+        "description": "Catering Large Specialty Pizzas (3x Assorted)",
+        "quantity": 3.0,
+        "unit_price": 23.0,
+        "amount": 69.0,
+        "confidence": 0.93
+      },
+      {
+        "description": "Beverages - 2L Soda Bottles & Sparkling Water",
+        "quantity": 3.0,
+        "unit_price": 3.5,
+        "amount": 10.5,
+        "confidence": 0.92
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Luigi's Pizza & Catering",
+    "vendor_canonical": "Luigi's Pizza & Catering",
+    "vendor_id": null,
+    "vendor_match_score": 32.5,
+    "is_known_vendor": false,
+    "invoice_number": "REC-LUI-44810",
+    "invoice_date": "2026-08-14",
+    "due_date": "2026-08-14",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 79.5,
+    "tax_amount": 6.0,
+    "total_amount": 85.5,
+    "amount_due": 85.5,
+    "spend_category": "Meals & Entertainment",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Catering Large Specialty Pizzas (3x Assorted)",
+        "quantity": 3.0,
+        "unit_price": 23.0,
+        "total_price": 69.0,
+        "category": "Meals & Entertainment"
+      },
+      {
+        "item_id": "item_2",
+        "description": "Beverages - 2L Soda Bottles & Sparkling Water",
+        "quantity": 3.0,
+        "unit_price": 3.5,
+        "total_price": 10.5,
+        "category": "Meals & Entertainment"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": true,
+    "anomaly_flags": [
+      {
+        "anomaly_type": "unrecognized_vendor",
+        "severity": "WARNING",
+        "description": "Vendor 'Luigi's Pizza & Catering' does not match any approved vendor in the known vendors database (best match score: 32.5% < 70.0%).",
+        "details": {
+          "vendor_raw": "Luigi's Pizza & Catering",
+          "best_match": null,
+          "match_score": 32.5,
+          "threshold": 70.0
+        }
+      }
+    ],
+    "risk_score": 0.5
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 0.0,
+    "exact_canonical_vendor": "Luigi's Pizza & Catering",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-08-14",
+    "exact_total_amount": 85.5,
+    "exact_spend_category": "Meals & Entertainment",
+    "min_line_items_count": 2,
+    "is_duplicate": false,
+    "has_anomalies": true,
+    "expected_anomaly_types": [
+      "unrecognized_vendor"
+    ]
+  }
+}

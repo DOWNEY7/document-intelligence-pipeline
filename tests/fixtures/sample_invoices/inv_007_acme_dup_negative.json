@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "fixture_id": "INV-007",
+    "filename": "inv_007_acme_dup_negative.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "Negative duplicate (+36 days from INV-005, outside 7-day window)",
+    "test_tags": [
+      "duplicate_negative",
+      "acme",
+      "outside_window_36d",
+      "tier1",
+      "tier2"
+    ],
+    "file_sha256": "2e8881a8d61cab407a9995f89a53cc8dae4addeb98e059e1fd3fb66bd267b9e5",
+    "file_size_bytes": 2768
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Acme Corporation",
+      "confidence": 0.99,
+      "raw_text": "Acme Corporation"
+    },
+    "vendor_address": {
+      "value": "123 Industrial Parkway, Springfield, IL 62701",
+      "confidence": 0.95,
+      "raw_text": "123 Industrial Parkway, Springfield, IL 62701"
+    },
+    "customer_name": {
+      "value": "Contoso Global Enterprises",
+      "confidence": 0.97,
+      "raw_text": "Contoso Global Enterprises"
+    },
+    "invoice_id": {
+      "value": "ACM-2026-0618",
+      "confidence": 0.98,
+      "raw_text": "ACM-2026-0618"
+    },
+    "invoice_date": {
+      "value": "2026-09-15",
+      "confidence": 0.99,
+      "raw_text": "2026-09-15"
+    },
+    "due_date": {
+      "value": "2026-10-15",
+      "confidence": 0.97,
+      "raw_text": "2026-10-15"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.99,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 500.0,
+      "confidence": 0.98,
+      "raw_text": "$500.00"
+    },
+    "total_tax": {
+      "value": 0.0,
+      "confidence": 0.95,
+      "raw_text": "$0.00"
+    },
+    "invoice_total": {
+      "value": 500.0,
+      "confidence": 0.99,
+      "raw_text": "$500.00"
+    },
+    "amount_due": {
+      "value": 500.0,
+      "confidence": 0.98,
+      "raw_text": "$500.00"
+    },
+    "line_items": [
+      {
+        "description": "Industrial Precision Heavy-Duty Widget Model A (Monthly Standard Restock)",
+        "quantity": 5.0,
+        "unit_price": 100.0,
+        "amount": 500.0,
+        "confidence": 0.98
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Acme Corporation",
+    "vendor_canonical": "Acme Corporation",
+    "vendor_id": "VEND-ACME-001",
+    "vendor_match_score": 100.0,
+    "is_known_vendor": true,
+    "invoice_number": "ACM-2026-0618",
+    "invoice_date": "2026-09-15",
+    "due_date": "2026-10-15",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 500.0,
+    "tax_amount": 0.0,
+    "total_amount": 500.0,
+    "amount_due": 500.0,
+    "spend_category": "Office Supplies & Equipment",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Industrial Precision Heavy-Duty Widget Model A (Monthly Standard Restock)",
+        "quantity": 5.0,
+        "unit_price": 100.0,
+        "total_price": 500.0,
+        "category": "Office Supplies & Equipment"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.0
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Acme Corporation",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-09-15",
+    "exact_total_amount": 500.0,
+    "exact_spend_category": "Office Supplies & Equipment",
+    "min_line_items_count": 1,
+    "is_duplicate": false,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}

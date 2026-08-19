@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "fixture_id": "INV-004",
+    "filename": "inv_004_thermal_receipt_uber.png",
+    "file_format": "png",
+    "mime_type": "image/png",
+    "document_type": "receipt",
+    "description": "PNG thermal receipt image, ride-share category, informal layout",
+    "test_tags": [
+      "receipt",
+      "png_image",
+      "rideshare",
+      "thermal_layout",
+      "tier1",
+      "tier3"
+    ],
+    "file_sha256": "d705675b4b7cbc7dff034e1bcf24b657ec4f6e2eb985f9367d294d93326dc486",
+    "file_size_bytes": 23009
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "UBER *TRIP HELP.UBER",
+      "confidence": 0.94,
+      "raw_text": "UBER *TRIP HELP.UBER"
+    },
+    "vendor_address": {
+      "value": "1515 3rd St, San Francisco, CA 94158",
+      "confidence": 0.91,
+      "raw_text": "1515 3rd St, San Francisco, CA 94158"
+    },
+    "customer_name": {
+      "value": "Contoso Employee",
+      "confidence": 0.9,
+      "raw_text": "Contoso Employee"
+    },
+    "invoice_id": {
+      "value": "UBER-TRIP-883921",
+      "confidence": 0.96,
+      "raw_text": "UBER-TRIP-883921"
+    },
+    "invoice_date": {
+      "value": "2026-08-07",
+      "confidence": 0.97,
+      "raw_text": "2026-08-07 14:23 PST"
+    },
+    "due_date": {
+      "value": "2026-08-07",
+      "confidence": 0.95,
+      "raw_text": "2026-08-07"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.98,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 37.8,
+      "confidence": 0.95,
+      "raw_text": "$37.80"
+    },
+    "total_tax": {
+      "value": 0.0,
+      "confidence": 0.92,
+      "raw_text": "$0.00"
+    },
+    "invoice_total": {
+      "value": 42.8,
+      "confidence": 0.98,
+      "raw_text": "$42.80"
+    },
+    "amount_due": {
+      "value": 42.8,
+      "confidence": 0.97,
+      "raw_text": "$42.80"
+    },
+    "line_items": [
+      {
+        "description": "UberX Trip - SFO Airport to Downtown Hotel",
+        "quantity": 1.0,
+        "unit_price": 35.0,
+        "amount": 35.0,
+        "confidence": 0.95
+      },
+      {
+        "description": "Airport Surcharge & Local Regulatory Fee",
+        "quantity": 1.0,
+        "unit_price": 2.8,
+        "amount": 2.8,
+        "confidence": 0.94
+      },
+      {
+        "description": "Driver Gratuity / Tip",
+        "quantity": 1.0,
+        "unit_price": 5.0,
+        "amount": 5.0,
+        "confidence": 0.93
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "UBER *TRIP HELP.UBER",
+    "vendor_canonical": "Uber Technologies",
+    "vendor_id": "VEND-UBER-001",
+    "vendor_match_score": 78.5,
+    "is_known_vendor": true,
+    "invoice_number": "UBER-TRIP-883921",
+    "invoice_date": "2026-08-07",
+    "due_date": "2026-08-07",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 37.8,
+    "tax_amount": 0.0,
+    "total_amount": 42.8,
+    "amount_due": 42.8,
+    "spend_category": "Travel & Transportation",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "UberX Trip - SFO Airport to Downtown Hotel",
+        "quantity": 1.0,
+        "unit_price": 35.0,
+        "total_price": 35.0,
+        "category": "Travel & Transportation"
+      },
+      {
+        "item_id": "item_2",
+        "description": "Airport Surcharge & Local Regulatory Fee",
+        "quantity": 1.0,
+        "unit_price": 2.8,
+        "total_price": 2.8,
+        "category": "Travel & Transportation"
+      },
+      {
+        "item_id": "item_3",
+        "description": "Driver Gratuity / Tip",
+        "quantity": 1.0,
+        "unit_price": 5.0,
+        "total_price": 5.0,
+        "category": "Travel & Transportation"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.0
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 75.0,
+    "exact_canonical_vendor": "Uber Technologies",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-08-07",
+    "exact_total_amount": 42.8,
+    "exact_spend_category": "Travel & Transportation",
+    "min_line_items_count": 3,
+    "is_duplicate": false,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}

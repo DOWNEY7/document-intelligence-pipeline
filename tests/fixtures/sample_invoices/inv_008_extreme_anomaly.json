@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "fixture_id": "INV-008",
+    "filename": "inv_008_extreme_anomaly.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "Extreme amount anomaly (> $50,000 statistical outlier threshold)",
+    "test_tags": [
+      "anomaly",
+      "extreme_amount",
+      "outlier",
+      "critical_risk",
+      "tier1",
+      "tier2",
+      "tier3"
+    ],
+    "file_sha256": "f40d46fc20e78b1d72942e08d06565dbaa32c4a8d9b858cb5a7853b5fc611541",
+    "file_size_bytes": 2837
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Delta Air Lines Inc",
+      "confidence": 0.98,
+      "raw_text": "Delta Air Lines Inc"
+    },
+    "vendor_address": {
+      "value": "1030 Delta Blvd, Atlanta, GA 30354",
+      "confidence": 0.95,
+      "raw_text": "1030 Delta Blvd, Atlanta, GA 30354"
+    },
+    "customer_name": {
+      "value": "Contoso Global Enterprises",
+      "confidence": 0.97,
+      "raw_text": "Contoso Global Enterprises"
+    },
+    "invoice_id": {
+      "value": "DAL-CHARTER-99012",
+      "confidence": 0.98,
+      "raw_text": "DAL-CHARTER-99012"
+    },
+    "invoice_date": {
+      "value": "2026-08-12",
+      "confidence": 0.99,
+      "raw_text": "2026-08-12"
+    },
+    "due_date": {
+      "value": "2026-08-26",
+      "confidence": 0.96,
+      "raw_text": "2026-08-26"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.99,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 1200000.0,
+      "confidence": 0.98,
+      "raw_text": "$1,200,000.00"
+    },
+    "total_tax": {
+      "value": 50000.0,
+      "confidence": 0.97,
+      "raw_text": "$50,000.00"
+    },
+    "invoice_total": {
+      "value": 1250000.0,
+      "confidence": 0.99,
+      "raw_text": "$1,250,000.00"
+    },
+    "amount_due": {
+      "value": 1250000.0,
+      "confidence": 0.98,
+      "raw_text": "$1,250,000.00"
+    },
+    "line_items": [
+      {
+        "description": "Annual Corporate Executive Jet Fleet Charter Agreement (Global Operations)",
+        "quantity": 1.0,
+        "unit_price": 1200000.0,
+        "amount": 1200000.0,
+        "confidence": 0.98
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Delta Air Lines Inc",
+    "vendor_canonical": "Delta Air Lines",
+    "vendor_id": "VEND-DAL-001",
+    "vendor_match_score": 95.0,
+    "is_known_vendor": true,
+    "invoice_number": "DAL-CHARTER-99012",
+    "invoice_date": "2026-08-12",
+    "due_date": "2026-08-26",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 1200000.0,
+    "tax_amount": 50000.0,
+    "total_amount": 1250000.0,
+    "amount_due": 1250000.0,
+    "spend_category": "Travel & Transportation",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Annual Corporate Executive Jet Fleet Charter Agreement (Global Operations)",
+        "quantity": 1.0,
+        "unit_price": 1200000.0,
+        "total_price": 1200000.0,
+        "category": "Travel & Transportation"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": true,
+    "anomaly_flags": [
+      {
+        "anomaly_type": "extreme_amount",
+        "severity": "CRITICAL",
+        "description": "Total invoice amount $1,250,000.00 exceeds the statistical outlier limit of $50,000.00.",
+        "details": {
+          "threshold": 50000.0,
+          "total_amount": 1250000.0,
+          "ratio_to_threshold": 25.0
+        }
+      }
+    ],
+    "risk_score": 0.95
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Delta Air Lines",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-08-12",
+    "exact_total_amount": 1250000.0,
+    "exact_spend_category": "Travel & Transportation",
+    "min_line_items_count": 1,
+    "is_duplicate": false,
+    "has_anomalies": true,
+    "expected_anomaly_types": [
+      "extreme_amount"
+    ]
+  }
+}

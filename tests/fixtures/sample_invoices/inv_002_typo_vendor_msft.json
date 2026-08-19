@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "fixture_id": "INV-002",
+    "filename": "inv_002_typo_vendor_msft.pdf",
+    "file_format": "pdf",
+    "mime_type": "application/pdf",
+    "document_type": "invoice",
+    "description": "Noisy vendor string with typo & regional entity variation",
+    "test_tags": [
+      "fuzzy_vendor",
+      "typo",
+      "saas",
+      "tier1",
+      "tier3"
+    ],
+    "file_sha256": "a8948d1c900ad6674d0a845a8fdcef95556a29a6d3ceae4863da57504b0b6658",
+    "file_size_bytes": 2770
+  },
+  "raw_extraction": {
+    "vendor_name": {
+      "value": "Microsft Corp Ireland",
+      "confidence": 0.92,
+      "raw_text": "Microsft Corp Ireland"
+    },
+    "vendor_address": {
+      "value": "One Microsoft Place, Leopardstown, Dublin 18, Ireland",
+      "confidence": 0.93,
+      "raw_text": "One Microsoft Place, Leopardstown, Dublin 18, Ireland"
+    },
+    "customer_name": {
+      "value": "Contoso Global Enterprises",
+      "confidence": 0.95,
+      "raw_text": "Contoso Global Enterprises"
+    },
+    "invoice_id": {
+      "value": "MSFT-9842103",
+      "confidence": 0.97,
+      "raw_text": "MSFT-9842103"
+    },
+    "invoice_date": {
+      "value": "2026-08-03",
+      "confidence": 0.96,
+      "raw_text": "2026-08-03"
+    },
+    "due_date": {
+      "value": "2026-09-02",
+      "confidence": 0.95,
+      "raw_text": "2026-09-02"
+    },
+    "currency": {
+      "value": "USD",
+      "symbol": "$",
+      "confidence": 0.98,
+      "raw_text": "$"
+    },
+    "subtotal": {
+      "value": 350.0,
+      "confidence": 0.97,
+      "raw_text": "$350.00"
+    },
+    "total_tax": {
+      "value": 0.0,
+      "confidence": 0.95,
+      "raw_text": "$0.00"
+    },
+    "invoice_total": {
+      "value": 350.0,
+      "confidence": 0.98,
+      "raw_text": "$350.00"
+    },
+    "amount_due": {
+      "value": 350.0,
+      "confidence": 0.97,
+      "raw_text": "$350.00"
+    },
+    "line_items": [
+      {
+        "description": "Microsoft 365 E5 Enterprise License (Monthly Subscription)",
+        "quantity": 10.0,
+        "unit_price": 35.0,
+        "amount": 350.0,
+        "confidence": 0.96
+      }
+    ]
+  },
+  "normalized_expected": {
+    "vendor_raw": "Microsft Corp Ireland",
+    "vendor_canonical": "Microsoft Corporation",
+    "vendor_id": "VEND-MSFT-001",
+    "vendor_match_score": 86.5,
+    "is_known_vendor": true,
+    "invoice_number": "MSFT-9842103",
+    "invoice_date": "2026-08-03",
+    "due_date": "2026-09-02",
+    "currency_raw": "$",
+    "currency_iso": "USD",
+    "subtotal": 350.0,
+    "tax_amount": 0.0,
+    "total_amount": 350.0,
+    "amount_due": 350.0,
+    "spend_category": "Software Subscriptions",
+    "line_items": [
+      {
+        "item_id": "item_1",
+        "description": "Microsoft 365 E5 Enterprise License (Monthly Subscription)",
+        "quantity": 10.0,
+        "unit_price": 35.0,
+        "total_price": 350.0,
+        "category": "Software Subscriptions"
+      }
+    ]
+  },
+  "expected_flags": {
+    "is_duplicate": false,
+    "duplicate_of_id": null,
+    "duplicate_reason": null,
+    "duplicate_match_details": null,
+    "has_anomalies": false,
+    "anomaly_flags": [],
+    "risk_score": 0.0
+  },
+  "test_assertions": {
+    "min_vendor_match_score": 85.0,
+    "exact_canonical_vendor": "Microsoft Corporation",
+    "exact_currency_iso": "USD",
+    "exact_invoice_date": "2026-08-03",
+    "exact_total_amount": 350.0,
+    "exact_spend_category": "Software Subscriptions",
+    "min_line_items_count": 1,
+    "is_duplicate": false,
+    "has_anomalies": false,
+    "expected_anomaly_types": []
+  }
+}
