@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software in your research or commercial projects, please cite it as below."
+authors:
+  - family-names: "M"
+    given-names: "Fareeth"
+    alias: "DOWNEY7"
+title: "Document Intelligence Pipeline: Enterprise Invoice & Receipt Ingestion, Canonical Normalization, and Spend Analytics"
+version: 0.1.0
+date-released: 2026-08-19
+url: "https://github.com/DOWNEY7/document-intelligence-pipeline"
+repository-code: "https://github.com/DOWNEY7/document-intelligence-pipeline"
+keywords:
+  - "document-intelligence"
+  - "fastapi"
+  - "streamlit"
+  - "azure-document-intelligence"
+  - "cosmos-db"
+  - "pydantic-v2"
+  - "invoice-processing"
+  - "spend-analytics"
+license: MIT

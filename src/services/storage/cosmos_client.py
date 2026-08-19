@@ -69,7 +69,6 @@ class CosmosStorageRepository(BaseStorageRepository):
 
         try:
             from azure.cosmos import CosmosClient, PartitionKey
-            from azure.cosmos.exceptions import CosmosHttpResponseError
 
             self._client = CosmosClient(self.endpoint, credential=self.key)
             self._database = self._client.create_database_if_not_exists(id=self.database_name)

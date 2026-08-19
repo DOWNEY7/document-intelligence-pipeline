@@ -11,12 +11,10 @@ Comprehensive Normalization Engine:
 
 from __future__ import annotations
 
-import json
 import logging
 import re
 import uuid
 from datetime import UTC, date, datetime
-from typing import Any
 
 from src.config import Settings, get_settings
 from src.core.models import (
@@ -27,7 +25,6 @@ from src.core.models import (
     LineItem,
     NormalizedInvoice,
     RawInvoicePayload,
-    SpendCategory,
 )
 from src.services.normalization.taxonomy import (
     SpendTaxonomyClassifier,

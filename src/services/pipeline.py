@@ -14,10 +14,9 @@ from __future__ import annotations
 
 import logging
 import uuid
-from typing import Any
 
 from src.config import Settings, get_settings
-from src.core.models import NormalizedInvoice, RawInvoicePayload
+from src.core.models import NormalizedInvoice
 from src.core.storage import StorageManager, get_storage_service
 from src.services.detection import DetectionService, get_detection_service
 from src.services.extraction.service import ExtractionService, get_extraction_service

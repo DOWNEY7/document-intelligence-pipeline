@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Any
 
 from src.config import Settings, get_settings
 from src.services.storage.base import (

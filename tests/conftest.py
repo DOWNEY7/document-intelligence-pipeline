@@ -68,8 +68,8 @@ def test_settings(temp_storage_dir: Path) -> Settings:
 @pytest.fixture
 def client(test_settings: Settings) -> Generator[TestClient, None, None]:
     """Provides a FastAPI TestClient instance configured with test settings."""
-    from src.services.pipeline import PipelineService, get_pipeline_service
     from src.services.normalization import get_normalization_service
+    from src.services.pipeline import PipelineService, get_pipeline_service
     from src.services.storage import get_storage_repository
 
     app = create_app(settings=test_settings)

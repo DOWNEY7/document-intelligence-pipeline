@@ -11,7 +11,6 @@ from typing import Any
 
 from src.core.models import NormalizedInvoice, RawInvoicePayload
 
-
 # ============================================================================
 # Storage Exceptions
 # ============================================================================

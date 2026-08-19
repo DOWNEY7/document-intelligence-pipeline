@@ -9,9 +9,10 @@ description = "Enterprise Document Intelligence Pipeline for Invoices and Receip
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
+    { name = "Fareeth M", email = "downey07@protonmail.com" },
     { name = "Document Intelligence Engineering Team" }
 ]
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 keywords = ["document-intelligence", "invoice-processing", "azure", "fastapi", "pydantic", "streamlit"]
 classifiers = [
     "Development Status :: 4 - Beta",

@@ -5,8 +5,7 @@ Unit tests for Anomaly Detection Engine and Risk Scorer.
 """
 
 import uuid
-from datetime import datetime, timedelta, UTC
-import pytest
+from datetime import UTC, datetime, timedelta
 
 from src.core.models import (
     AnomalyFlag,

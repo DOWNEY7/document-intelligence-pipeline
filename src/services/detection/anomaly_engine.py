@@ -17,10 +17,8 @@ from __future__ import annotations
 
 import logging
 import statistics
-from datetime import UTC, datetime, timedelta
-from typing import Any
+from datetime import UTC, datetime
 
-from src.config import Settings, get_settings
 from src.core.models import AnomalyFlag, AnomalySeverity, NormalizedInvoice
 from src.services.detection.duplicate_engine import DuplicateDetectionEngine
 

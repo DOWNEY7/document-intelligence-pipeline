@@ -14,7 +14,7 @@ A secondary fingerprint match (invoice_id) is used for high-confidence detection
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 from src.core.models import AnomalyFlag, AnomalySeverity, NormalizedInvoice

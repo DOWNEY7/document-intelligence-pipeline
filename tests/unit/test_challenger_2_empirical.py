@@ -117,8 +117,8 @@ class TestConcurrencyAndPerformanceStress:
         app.dependency_overrides[get_storage_service] = lambda: storage
         app.dependency_overrides[get_settings] = lambda: test_settings
         # Ensure pipeline uses same storage so file_exists checks work
-        from src.services.pipeline import PipelineService, get_pipeline_service
         from src.services.normalization import get_normalization_service
+        from src.services.pipeline import PipelineService, get_pipeline_service
         from src.services.storage import get_storage_repository
         _storage_repo = get_storage_repository(test_settings)
         _pipeline_svc = PipelineService(
@@ -250,8 +250,8 @@ class TestConcurrencyAndPerformanceStress:
         app.dependency_overrides[get_storage_service] = lambda: storage
         app.dependency_overrides[get_settings] = lambda: test_settings
         # Ensure pipeline uses same storage so file retrieval works
-        from src.services.pipeline import PipelineService, get_pipeline_service
         from src.services.normalization import get_normalization_service
+        from src.services.pipeline import PipelineService, get_pipeline_service
         from src.services.storage import get_storage_repository
         _storage_repo = get_storage_repository(test_settings)
         _pipeline_svc = PipelineService(

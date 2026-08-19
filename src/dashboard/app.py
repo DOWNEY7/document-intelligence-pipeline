@@ -26,30 +26,28 @@ _ROOT = Path(__file__).resolve().parent.parent.parent
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-import streamlit as st
+import streamlit as st  # noqa: E402
 
-# Configure page
-st.set_page_config(
-    page_title="Document Intelligence Pipeline",
-    page_icon="🧾",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        "Get Help": None,
-        "Report a bug": None,
-        "About": "# Document Intelligence Pipeline\nEnterprise invoice processing powered by Azure AI.",
-    },
-)
-
-from src.dashboard.views.executive_kpis import render_executive_kpis
-from src.dashboard.views.spend_analytics import render_spend_analytics
-from src.dashboard.views.verification_queue import render_verification_queue
-from src.dashboard.views.live_upload import render_live_upload
-from src.dashboard.views.invoice_explorer import render_invoice_explorer
+from src.dashboard.views.executive_kpis import render_executive_kpis  # noqa: E402
+from src.dashboard.views.invoice_explorer import render_invoice_explorer  # noqa: E402
+from src.dashboard.views.live_upload import render_live_upload  # noqa: E402
+from src.dashboard.views.spend_analytics import render_spend_analytics  # noqa: E402
+from src.dashboard.views.verification_queue import render_verification_queue  # noqa: E402
 
 
 def main() -> None:
     """Main Streamlit dashboard entry point."""
+    st.set_page_config(
+        page_title="Document Intelligence Pipeline",
+        page_icon="🧾",
+        layout="wide",
+        initial_sidebar_state="expanded",
+        menu_items={
+            "Get Help": None,
+            "Report a bug": None,
+            "About": "# Document Intelligence Pipeline\nEnterprise invoice processing powered by Azure AI.",
+        },
+    )
 
     # ── Sidebar ────────────────────────────────────────────────────────────────
     with st.sidebar:

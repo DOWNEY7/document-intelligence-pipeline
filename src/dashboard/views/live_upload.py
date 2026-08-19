@@ -13,8 +13,6 @@ Provides:
 
 from __future__ import annotations
 
-import json
-import time
 import requests
 import streamlit as st
 
@@ -97,7 +95,7 @@ def render_live_upload(api_base: str) -> None:
                     category = data.get("spend_category")
                     doc_id = data.get("document_id")
 
-                    st.markdown(f"### ✅ {res['filename']}")
+                    st.markdown(f"### ✅ {res['filename']} `(Doc ID: {doc_id})`")
                     r_col1, r_col2, r_col3, r_col4 = st.columns(4)
                     with r_col1:
                         st.metric("Vendor", str(vendor))

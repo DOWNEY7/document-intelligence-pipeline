@@ -7,7 +7,6 @@ for 100% offline execution, testing, and persistence.
 
 from __future__ import annotations
 
-import json
 import logging
 import sqlite3
 import threading

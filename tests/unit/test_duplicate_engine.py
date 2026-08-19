@@ -5,10 +5,8 @@ Unit tests for 7-Day Sliding Window Duplicate Detection Engine.
 """
 
 import uuid
-from datetime import datetime, timedelta, UTC
-import pytest
 
-from src.core.models import ExtractedField, NormalizedInvoice, LineItem
+from src.core.models import ExtractedField, NormalizedInvoice
 from src.services.detection.duplicate_engine import DuplicateDetectionEngine
 
 

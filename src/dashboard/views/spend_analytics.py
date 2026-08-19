@@ -12,8 +12,6 @@ Interactive Plotly charts:
 
 from __future__ import annotations
 
-from collections import defaultdict
-
 import requests
 import streamlit as st
 
@@ -33,9 +31,8 @@ def render_spend_analytics(api_base: str) -> None:
     st.header("📈 Spend Analytics")
 
     try:
-        import plotly.express as px
-        import plotly.graph_objects as go
         import pandas as pd
+        import plotly.express as px
     except ImportError:
         st.error("Install plotly: `pip install plotly`")
         return
