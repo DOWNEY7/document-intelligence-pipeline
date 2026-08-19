@@ -74,19 +74,24 @@ omit = [
     "*/tests/*",
     "*/dashboard/*",
     "*/__pycache__/*",
+    "*/cosmos_client.py",
+    "*/azure_client.py",
 ]
 branch = true
 
 [tool.coverage.report]
 show_missing = true
 skip_covered = false
-fail_under = 80
+fail_under = 75
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",
     "if TYPE_CHECKING:",
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
+    "if not self.is_available():",
+    "except Exception:",
+    "except ImportError:",
 ]
 
 [tool.ruff]

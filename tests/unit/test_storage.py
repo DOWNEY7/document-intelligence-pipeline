@@ -78,7 +78,7 @@ class TestStorageComprehensive:
         assert manager.get_content_type(Path("img.jpeg")) == "image/jpeg"
         assert manager.get_content_type(Path("img.tiff")) == "image/tiff"
         assert manager.get_content_type(Path("img.bmp")) == "image/bmp"
-        assert manager.get_content_type(Path("unknown.xyz")) == "application/octet-stream"
+        assert manager.get_content_type(Path("unknown.customfakeext")) == "application/octet-stream"
 
     @pytest.mark.asyncio
     async def test_save_upload_file_async(self, temp_storage_dir: Path, test_settings: Settings):
