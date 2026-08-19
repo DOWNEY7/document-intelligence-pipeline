@@ -7,7 +7,7 @@ MockAnalyzeResultBuilder, ground truth dataset fixtures, and comparison assertio
 import io
 import json
 from collections.abc import Generator
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 from unittest.mock import MagicMock
@@ -29,6 +29,7 @@ from src.core.models import (
 from src.core.storage import StorageManager, get_storage_service
 from src.services.extraction.service import ExtractionService, get_extraction_service
 
+UTC = timezone.utc
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 FIXTURES_DIR = WORKSPACE_ROOT / "tests" / "fixtures"
 SAMPLE_INVOICES_DIR = FIXTURES_DIR / "sample_invoices"

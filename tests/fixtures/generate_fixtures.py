@@ -13,19 +13,18 @@ import argparse
 import hashlib
 import json
 import os
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-# Pillow imports for image generation
 from PIL import Image, ImageDraw, ImageFont
-
-# ReportLab imports for PDF generation
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+
+UTC = timezone.utc
 
 # ==============================================================================
 # 1. ReportLab PDF Generation Helper

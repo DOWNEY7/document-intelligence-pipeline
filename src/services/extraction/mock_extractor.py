@@ -16,7 +16,7 @@ import logging
 import re
 import uuid
 import zlib
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 
 from src.core.models import (
@@ -27,6 +27,7 @@ from src.core.models import (
     RawInvoicePayload,
 )
 
+UTC = timezone.utc
 logger = logging.getLogger(__name__)
 
 MONTH_MAP = {

@@ -14,7 +14,7 @@ from __future__ import annotations
 import logging
 import re
 import uuid
-from datetime import UTC, date, datetime
+from datetime import date, datetime, timezone
 
 from src.config import Settings, get_settings
 from src.core.models import (
@@ -34,6 +34,7 @@ from src.services.normalization.vendor_matcher import (
     VendorMatcher,
 )
 
+UTC = timezone.utc
 logger = logging.getLogger(__name__)
 
 

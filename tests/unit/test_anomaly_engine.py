@@ -5,7 +5,7 @@ Unit tests for Anomaly Detection Engine and Risk Scorer.
 """
 
 import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from src.core.models import (
     AnomalyFlag,
@@ -18,6 +18,8 @@ from src.services.detection.anomaly_engine import (
     AnomalyDetectionEngine,
     DetectionService,
 )
+
+UTC = timezone.utc
 
 
 def make_test_invoice(

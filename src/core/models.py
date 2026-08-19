@@ -8,11 +8,13 @@ raw extraction persistence, normalized invoice records, and API contracts.
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Generic, TypeVar
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+UTC = timezone.utc
 
 T = TypeVar("T")
 

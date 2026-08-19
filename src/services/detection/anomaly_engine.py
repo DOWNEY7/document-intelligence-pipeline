@@ -17,11 +17,12 @@ from __future__ import annotations
 
 import logging
 import statistics
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from src.core.models import AnomalyFlag, AnomalySeverity, NormalizedInvoice
 from src.services.detection.duplicate_engine import DuplicateDetectionEngine
 
+UTC = timezone.utc
 logger = logging.getLogger(__name__)
 
 

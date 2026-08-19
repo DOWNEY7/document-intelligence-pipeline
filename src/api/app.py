@@ -5,7 +5,7 @@ Document Intelligence Pipeline - Milestone 1
 
 import logging
 from contextlib import asynccontextmanager
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -15,6 +15,7 @@ from fastapi.responses import JSONResponse
 from src.api.routes import router as api_router
 from src.config import Settings, get_settings
 
+UTC = timezone.utc
 logger = logging.getLogger("document_intelligence.api")
 
 

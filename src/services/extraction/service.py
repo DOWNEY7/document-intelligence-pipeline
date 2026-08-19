@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import logging
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from src.config import Settings, get_settings
 from src.core.models import (
@@ -26,6 +26,7 @@ from src.services.extraction.azure_client import (
 )
 from src.services.extraction.mock_extractor import MockExtractionService
 
+UTC = timezone.utc
 logger = logging.getLogger(__name__)
 
 

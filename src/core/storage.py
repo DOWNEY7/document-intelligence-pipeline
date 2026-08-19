@@ -13,13 +13,15 @@ import os
 import re
 import uuid
 from collections.abc import Generator
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from fastapi import UploadFile
 
 from src.config import Settings, get_settings
+
+UTC = timezone.utc
 
 
 def generate_document_id() -> str:
