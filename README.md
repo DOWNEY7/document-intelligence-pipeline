@@ -14,50 +14,50 @@ An enterprise-grade, end-to-end Document Intelligence & Spend Intelligence Pipel
 
 ```mermaid
 flowchart TD
-    subgraph Ingestion ["1. Document Ingestion Layer (FastAPI)"]
-        UI["Streamlit / Client Upload"] -->|PDF, PNG, JPG, TIFF| API["FastAPI Endpoints (/upload & /api/v1/upload)"]
-        API --> StorageMgr["StorageManager: File Hash & Persistence"]
-        StorageMgr --> S1[("Local Upload Store / Blob")]
+    subgraph Ingestion["1. Document Ingestion Layer"]
+        UI["Streamlit / Client Upload"] -->|Upload Documents| API["FastAPI Ingestion Endpoint"]
+        API --> StorageMgr["StorageManager File Persistence"]
+        StorageMgr --> S1[("Local File Storage")]
     end
 
-    subgraph Extraction ["2. Extraction Engine"]
+    subgraph Extraction["2. Extraction Engine"]
         API --> DocCheck{"Azure Configured?"}
         DocCheck -->|Yes| AzureClient["Azure Document Intelligence<br/>prebuilt-invoice Model"]
-        DocCheck -->|No / force_mock| MockExtractor["Offline Mock / Heuristic Extractor<br/>Hash & Regex Multi-Modal"]
-        AzureClient --> RawPayload["RawInvoicePayload Domain Model"]
+        DocCheck -->|No| MockExtractor["Offline Mock Extractor<br/>Multi-Modal Heuristics"]
+        AzureClient --> RawPayload["Raw Extraction Payload"]
         MockExtractor --> RawPayload
     end
 
-    subgraph Persistence1 ["3. Raw Audit Storage"]
-        RawPayload -->|Immutable Audit Copy| RawDB[("Cosmos DB: raw_extractions")]
+    subgraph Persistence1["3. Raw Audit Storage"]
+        RawPayload -->|Immutable Audit Copy| RawDB[("Cosmos DB: Raw Extractions")]
     end
 
-    subgraph Normalization ["4. LLM & Schema Normalization Layer"]
+    subgraph Normalization["4. Normalization Layer"]
         RawPayload --> NormService["Normalization Engine"]
-        NormService --> RapidFuzz["RapidFuzz Canonical Vendor Matcher<br/>16+ Registered Vendors & Aliases"]
-        NormService --> Taxonomy["11-Category Spend Taxonomy Classifier"]
-        NormService --> ISOParsers["ISO 8601 Date & ISO 4217 Currency Standardizer"]
+        NormService --> RapidFuzz["RapidFuzz Canonical Vendor Matcher<br/>16 Plus Registered Vendors"]
+        NormService --> Taxonomy["11-Category Spend Taxonomy"]
+        NormService --> ISOParsers["ISO Date and Currency Standardizer"]
         NormService --> PydanticVal["Pydantic v2 Schema Validator"]
-        PydanticVal --> NormModel["NormalizedInvoice Domain Model"]
+        PydanticVal --> NormModel["Normalized Invoice Model"]
     end
 
-    subgraph Detection ["5. Duplicate & Anomaly Engine"]
-        NormModel --> DupEngine["7-Day Sliding Window Duplicate Engine<br/>(Vendor + Amount +/- 7d / Invoice ID)"]
-        DupEngine --> AnomEngine["Multi-Rule Anomaly & Risk Engine<br/>(Extreme Outliers, Math Checks, Unrecognized Vendors)"]
-        AnomEngine --> EnrichedModel["Enriched NormalizedInvoice Record"]
+    subgraph Detection["5. Duplicate and Anomaly Engine"]
+        NormModel --> DupEngine["7-Day Duplicate Detection Engine<br/>Sliding Window Matching"]
+        DupEngine --> AnomEngine["Multi-Rule Anomaly and Risk Engine<br/>Outliers and Math Validation"]
+        AnomEngine --> EnrichedModel["Enriched Normalized Record"]
     end
 
-    subgraph Persistence2 ["6. Normalized Persistence"]
-        EnrichedModel --> NormDB[("Cosmos DB: normalized_invoices")]
+    subgraph Persistence2["6. Normalized Persistence"]
+        EnrichedModel --> NormDB[("Cosmos DB: Normalized Invoices")]
     end
 
-    subgraph AnalyticsUI ["7. Streamlit Executive Dashboard"]
+    subgraph AnalyticsUI["7. Streamlit Executive Dashboard"]
         NormDB --> DashKPI["Tab 1: Executive KPI Metrics"]
-        NormDB --> DashSpend["Tab 2: Monthly, Vendor & Category Spend"]
-        NormDB --> DashVerify["Tab 3: Split-Screen Verification Queue<br/>Live PDF/Image Streaming + Extracted Fields"]
+        NormDB --> DashSpend["Tab 2: Spend Analytics Charts"]
+        NormDB --> DashVerify["Tab 3: Verification Queue<br/>Side-by-Side Review"]
         S1 --> DashVerify
         API --> DashUpload["Tab 4: Live Ingestion Lab"]
-        NormDB --> DashExplorer["Tab 5: Searchable Invoice Explorer"]
+        NormDB --> DashExplorer["Tab 5: Searchable Explorer"]
     end
 ```
 
