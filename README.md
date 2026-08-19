@@ -15,48 +15,49 @@ An enterprise-grade, end-to-end Document Intelligence & Spend Intelligence Pipel
 ```mermaid
 flowchart TD
     subgraph Ingestion ["1. Document Ingestion Layer (FastAPI)"]
-        UI[Streamlit / Client Upload] -->|PDF, PNG, JPG, TIFF| API["/upload & /api/v1/upload"]
-        API --> StorageMgr[StorageManager: File Hash & Disk Persistence]
-        StorageMgr --> S1[(Local Upload Store / Blob)]
+        UI["Streamlit / Client Upload"] -->|PDF, PNG, JPG, TIFF| API["FastAPI Endpoints (/upload & /api/v1/upload)"]
+        API --> StorageMgr["StorageManager: File Hash & Persistence"]
+        StorageMgr --> S1[("Local Upload Store / Blob")]
     end
 
     subgraph Extraction ["2. Extraction Engine"]
-        API --> DocCheck{Azure Configured?}
-        DocCheck -->|Yes| AzureClient[Azure Document Intelligence\nprebuilt-invoice Model]
-        DocCheck -->|No / force_mock| MockExtractor[Offline Mock / Heuristic Extractor\nHash & Regex Multi-Modal]
-        AzureClient --> RawPayload[RawInvoicePayload]
+        API --> DocCheck{"Azure Configured?"}
+        DocCheck -->|Yes| AzureClient["Azure Document Intelligence<br/>prebuilt-invoice Model"]
+        DocCheck -->|No / force_mock| MockExtractor["Offline Mock / Heuristic Extractor<br/>Hash & Regex Multi-Modal"]
+        AzureClient --> RawPayload["RawInvoicePayload Domain Model"]
         MockExtractor --> RawPayload
     end
 
     subgraph Persistence1 ["3. Raw Audit Storage"]
-        RawPayload -->|Immutable Audit Copy| RawDB[(Cosmos DB: raw_extractions)]
+        RawPayload -->|Immutable Audit Copy| RawDB[("Cosmos DB: raw_extractions")]
     end
 
     subgraph Normalization ["4. LLM & Schema Normalization Layer"]
-        RawPayload --> NormService[Normalization Engine]
-        NormService --> RapidFuzz[RapidFuzz Canonical Vendor Matcher\n16+ Registered Vendors & Aliases]
-        NormService --> Taxonomy[11-Category Spend Taxonomy Classifier]
-        NormService --> ISOParsers[ISO 8601 Date & ISO 4217 Currency Standardizer]
-        NormService --> PydanticVal[Pydantic v2 Schema Validator]
-        PydanticVal --> NormModel[NormalizedInvoice Domain Model]
+        RawPayload --> NormService["Normalization Engine"]
+        NormService --> RapidFuzz["RapidFuzz Canonical Vendor Matcher<br/>16+ Registered Vendors & Aliases"]
+        NormService --> Taxonomy["11-Category Spend Taxonomy Classifier"]
+        NormService --> ISOParsers["ISO 8601 Date & ISO 4217 Currency Standardizer"]
+        NormService --> PydanticVal["Pydantic v2 Schema Validator"]
+        PydanticVal --> NormModel["NormalizedInvoice Domain Model"]
     end
 
     subgraph Detection ["5. Duplicate & Anomaly Engine"]
-        NormModel --> DupEngine["7-Day Sliding Window Duplicate Engine\n(Vendor + Amount ± 7d / Invoice ID)"]
-        DupEngine --> AnomEngine["Multi-Rule Anomaly & Risk Engine\n(Extreme Outliers, Math Checks, Unrecognized Vendors)"]
-        AnomEngine --> EnrichedModel[Enriched NormalizedInvoice Record]
+        NormModel --> DupEngine["7-Day Sliding Window Duplicate Engine<br/>(Vendor + Amount +/- 7d / Invoice ID)"]
+        DupEngine --> AnomEngine["Multi-Rule Anomaly & Risk Engine<br/>(Extreme Outliers, Math Checks, Unrecognized Vendors)"]
+        AnomEngine --> EnrichedModel["Enriched NormalizedInvoice Record"]
     end
 
     subgraph Persistence2 ["6. Normalized Persistence"]
-        EnrichedModel --> NormDB[(Cosmos DB: normalized_invoices)]
+        EnrichedModel --> NormDB[("Cosmos DB: normalized_invoices")]
     end
 
     subgraph AnalyticsUI ["7. Streamlit Executive Dashboard"]
-        NormDB --> DashKPI[📊 Tab 1: Executive KPI Metrics]
-        NormDB --> DashSpend[📈 Tab 2: Monthly, Vendor & Category Spend]
-        NormDB & S1 --> DashVerify[🔍 Tab 3: Split-Screen Verification Queue\nLive PDF/Image Streaming + Extracted Fields]
-        API --> DashUpload[📤 Tab 4: Live Ingestion Lab]
-        NormDB --> DashExplorer[📋 Tab 5: Searchable Invoice Explorer]
+        NormDB --> DashKPI["Tab 1: Executive KPI Metrics"]
+        NormDB --> DashSpend["Tab 2: Monthly, Vendor & Category Spend"]
+        NormDB --> DashVerify["Tab 3: Split-Screen Verification Queue<br/>Live PDF/Image Streaming + Extracted Fields"]
+        S1 --> DashVerify
+        API --> DashUpload["Tab 4: Live Ingestion Lab"]
+        NormDB --> DashExplorer["Tab 5: Searchable Invoice Explorer"]
     end
 ```
 
@@ -103,13 +104,18 @@ The pipeline is benchmarked against a matrix of 10 diverse test fixtures coverin
 
 ### 2. Environment Setup
 ```bash
-# Clone and enter directory
-cd "n:/01-PROJECTS/DOCUMENT INTELLIGENCE PIPELINE"
+# Clone the repository
+git clone https://github.com/DOWNEY7/document-intelligence-pipeline.git
+cd document-intelligence-pipeline
 
 # Create and activate virtual environment
 python -m venv .venv
-.venv\Scripts\activate   # Windows
-# source .venv/bin/activate # Linux/macOS
+
+# Activate virtual environment
+# On Windows:
+.venv\Scripts\activate
+# On Linux / macOS:
+source .venv/bin/activate
 
 # Install dependencies in editable mode with development tools
 pip install -e ".[dev]"
