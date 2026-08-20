@@ -19,10 +19,16 @@ import requests
 import streamlit as st
 
 
-def _fetch_flagged_invoices(api_base: str) -> list[dict]:
+def _fetch_flagged_invoices(api_base: str, api_key: str | None = None) -> list[dict]:
     """Fetch invoices that have anomalies, are duplicates, or have status NEEDS_REVIEW/FLAGGED."""
     try:
-        resp = requests.get(f"{api_base}/api/v1/invoices", params={"limit": 500}, timeout=10)
+        headers = {"X-API-Key": api_key} if api_key else None
+        resp = requests.get(
+            f"{api_base}/api/v1/invoices",
+            params={"limit": 500},
+            headers=headers,
+            timeout=10,
+        )
         if resp.status_code == 200:
             all_invoices = resp.json()
             # Filter for items requiring verification
@@ -39,24 +45,26 @@ def _fetch_flagged_invoices(api_base: str) -> list[dict]:
     return []
 
 
-def _fetch_document_file(api_base: str, doc_id: str) -> tuple[bytes | None, str]:
+def _fetch_document_file(api_base: str, doc_id: str, api_key: str | None = None) -> tuple[bytes | None, str]:
     """Fetch binary file for document preview."""
     try:
-        resp = requests.get(f"{api_base}/api/v1/documents/{doc_id}/file", timeout=15)
+        headers = {"X-API-Key": api_key} if api_key else None
+        resp = requests.get(f"{api_base}/api/v1/documents/{doc_id}/file", headers=headers, timeout=15)
         if resp.status_code == 200:
             content_type = resp.headers.get("content-type", "application/pdf")
             return resp.content, content_type
     except Exception:
         pass
-    return None, ""
+    return None, "application/pdf"
 
 
-def render_verification_queue(api_base: str) -> None:
-    """Render the Split-Screen Verification Queue view."""
-    st.header("🔍 Split-Screen Verification Queue")
-    st.caption("Review flagged invoices and inspect original source documents side-by-side with extracted data")
+def render_verification_queue(api_base: str, api_key: str | None = None) -> None:
+    """Render the Split-Screen Verification Queue."""
+    st.header("🔍 Document Verification Queue")
+    st.caption("Human-in-the-loop validation: Inspect source document side-by-side with extracted data")
 
-    flagged_invoices = _fetch_flagged_invoices(api_base)
+    with st.spinner("Loading verification queue..."):
+        flagged_invoices = _fetch_flagged_invoices(api_base, api_key=api_key)
 
     if not flagged_invoices:
         st.success("🎉 Verification queue is empty! No flagged anomalies or duplicate invoices pending review.")
@@ -97,7 +105,7 @@ def render_verification_queue(api_base: str) -> None:
         st.caption(f"File: **{filename}** | Document ID: `{doc_id}`")
 
         if doc_id:
-            file_bytes, content_type = _fetch_document_file(api_base, doc_id)
+            file_bytes, content_type = _fetch_document_file(api_base, doc_id, api_key=api_key)
             if file_bytes:
                 if "pdf" in content_type.lower() or filename.lower().endswith(".pdf"):
                     base64_pdf = base64.b64encode(file_bytes).decode("utf-8")

@@ -17,10 +17,10 @@ import requests
 import streamlit as st
 
 
-def render_live_upload(api_base: str) -> None:
-    """Render the Live Upload Lab view."""
-    st.header("📤 Live Document Upload & Ingestion Lab")
-    st.caption("Upload invoice or receipt documents (PDF, PNG, JPG) to execute the end-to-end extraction and normalization pipeline")
+def render_live_upload(api_base: str, api_key: str | None = None) -> None:
+    """Render the Live Upload and Ingestion Lab."""
+    st.header("📤 Document Ingestion Lab")
+    st.caption("Upload raw PDF/image files to execute the end-to-end extraction, normalization, and auditing pipeline")
 
     col_upload, col_settings = st.columns([2, 1], gap="medium")
 
@@ -51,6 +51,7 @@ def render_live_upload(api_base: str) -> None:
             progress_bar = st.progress(0)
             status_placeholder = st.empty()
 
+            headers = {"X-API-Key": api_key} if api_key else None
             results = []
             for i, file in enumerate(uploaded_files):
                 status_placeholder.info(f"Processing ({i+1}/{len(uploaded_files)}): **{file.name}**...")
@@ -65,6 +66,7 @@ def render_live_upload(api_base: str) -> None:
                         f"{api_base}/api/v1/upload",
                         files=files_payload,
                         params=params,
+                        headers=headers,
                         timeout=30,
                     )
 

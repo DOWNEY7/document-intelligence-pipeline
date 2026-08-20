@@ -17,6 +17,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 from fastapi.responses import FileResponse
 
+from src.api.auth import verify_api_key
 from src.config import Settings, get_settings
 from src.core.models import HealthResponse, NormalizedInvoice, RawInvoicePayload
 from src.core.storage import StorageManager, get_storage_service
@@ -49,6 +50,7 @@ async def upload_document(
     correlation_id: str | None = Query(default=None, description="Optional caller correlation ID"),
     settings: Settings = Depends(get_settings),
     pipeline_service: PipelineService = Depends(get_pipeline_service),
+    _auth: str | None = Depends(verify_api_key),
 ) -> NormalizedInvoice:
     """
     Handle document upload, storage, extraction, normalization, and dual-persistence.
@@ -128,6 +130,7 @@ async def list_invoices(
     limit: int = Query(default=100, ge=1, le=1000, description="Maximum number of items to return"),
     offset: int = Query(default=0, ge=0, description="Offset for pagination"),
     storage_repo: BaseStorageRepository = Depends(get_storage_repository),
+    _auth: str | None = Depends(verify_api_key),
 ) -> list[NormalizedInvoice]:
     """Retrieve normalized invoices from dual-storage repository."""
     return storage_repo.list_normalized(
@@ -151,6 +154,7 @@ async def list_invoices(
 async def get_invoice(
     id: str,
     storage_repo: BaseStorageRepository = Depends(get_storage_repository),
+    _auth: str | None = Depends(verify_api_key),
 ) -> NormalizedInvoice:
     """Retrieve a single normalized invoice by entity ID or document ID."""
     invoice = storage_repo.get_normalized(id)
@@ -173,6 +177,7 @@ async def get_invoice(
 async def get_by_correlation(
     correlation_id: str,
     storage_repo: BaseStorageRepository = Depends(get_storage_repository),
+    _auth: str | None = Depends(verify_api_key),
 ) -> dict[str, Any]:
     """Retrieve all linked raw and normalized records by correlation ID."""
     raws, norms = storage_repo.get_by_correlation_id(correlation_id)
@@ -198,6 +203,7 @@ async def get_by_correlation(
 async def get_raw_extraction(
     document_id: str,
     storage_repo: BaseStorageRepository = Depends(get_storage_repository),
+    _auth: str | None = Depends(verify_api_key),
 ) -> RawInvoicePayload:
     """Retrieve raw unnormalized extraction payload for auditing."""
     payload = storage_repo.get_raw(document_id)
@@ -217,6 +223,7 @@ async def get_raw_extraction(
 async def get_document_audit_trail(
     document_id: str,
     storage_repo: BaseStorageRepository = Depends(get_storage_repository),
+    _auth: str | None = Depends(verify_api_key),
 ) -> dict[str, Any]:
     """Retrieve unified audit trail linking raw extraction and normalized record."""
     try:
@@ -242,6 +249,7 @@ async def get_document_audit_trail(
 async def get_document_file(
     document_id: str,
     storage_service: StorageManager = Depends(get_storage_service),
+    _auth: str | None = Depends(verify_api_key),
 ) -> FileResponse:
     """Stream the raw file from storage by document_id."""
     file_path = storage_service.get_file_path(document_id)

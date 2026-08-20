@@ -61,6 +61,13 @@ def main() -> None:
             help="FastAPI backend URL",
         )
 
+        api_key = st.text_input(
+            "API Key (optional)",
+            value="",
+            type="password",
+            help="Secret API key when endpoint authentication is enabled",
+        )
+
         st.divider()
         st.caption("© 2026 Document Intelligence Pipeline")
 
@@ -74,19 +81,19 @@ def main() -> None:
     ])
 
     with tab_kpi:
-        render_executive_kpis(api_base)
+        render_executive_kpis(api_base, api_key=api_key or None)
 
     with tab_analytics:
-        render_spend_analytics(api_base)
+        render_spend_analytics(api_base, api_key=api_key or None)
 
     with tab_verify:
-        render_verification_queue(api_base)
+        render_verification_queue(api_base, api_key=api_key or None)
 
     with tab_upload:
-        render_live_upload(api_base)
+        render_live_upload(api_base, api_key=api_key or None)
 
     with tab_explorer:
-        render_invoice_explorer(api_base)
+        render_invoice_explorer(api_base, api_key=api_key or None)
 
 
 if __name__ == "__main__":

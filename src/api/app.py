@@ -57,12 +57,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         openapi_url="/openapi.json",
         lifespan=lifespan,
     )
+    app.state.settings = settings
+    app.dependency_overrides[get_settings] = lambda: settings
 
     # Configure CORS Middleware
+    # Per W3C CORS specification, wildcard origins ('*') combined with allow_credentials=True
+    # are rejected by browser security models. If '*' is specified, credentials must be disabled.
+    is_wildcard_origin = "*" in settings.CORS_ORIGINS
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.CORS_ORIGINS,
-        allow_credentials=True,
+        allow_credentials=not is_wildcard_origin,
         allow_methods=["*"],
         allow_headers=["*"],
     )

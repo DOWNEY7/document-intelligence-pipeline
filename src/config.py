@@ -38,7 +38,23 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     LOG_LEVEL: str = "INFO"
-    CORS_ORIGINS: list[str] = ["*"]
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:8501",
+        "http://127.0.0.1:8501",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ]
+
+    # Authentication Settings
+    API_KEY: str | None = Field(
+        default=None,
+        description="Secret API key for authenticating API requests. If unset, requests in dev mode are permitted.",
+    )
+    REQUIRE_AUTH: bool = Field(
+        default=False,
+        description="Whether to strictly require API key authentication on protected endpoints.",
+    )
 
     # Azure Document Intelligence Settings
     AZURE_FORM_RECOGNIZER_ENDPOINT: str | None = Field(

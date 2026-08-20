@@ -4,7 +4,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109%2B-009688.svg)](https://fastapi.tiangolo.com)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.31%2B-FF4B4B.svg)](https://streamlit.io)
 [![Pydantic v2](https://img.shields.io/badge/Pydantic-v2-E92063.svg)](https://docs.pydantic.dev)
-[![Tests](https://img.shields.io/badge/Tests-515%20Passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-303%20Passing-brightgreen.svg)]()
 
 An enterprise-grade, end-to-end Document Intelligence & Spend Intelligence Pipeline designed for automated invoice, receipt, and financial document ingestion, structured OCR extraction via Azure Document Intelligence (`prebuilt-invoice`), AI/heuristic canonical normalization with Pydantic validation, dual-storage auditing in Cosmos DB, real-time duplicate & anomaly detection, and an executive Streamlit verification dashboard.
 
@@ -73,6 +73,7 @@ flowchart TD
 6. **7-Day Window Duplicate Detection**: Flags duplicate submissions matching canonical vendor and total amount within a 7-day sliding window, plus invoice number fingerprinting.
 7. **Multi-Rule Anomaly & Risk Scoring**: Flags statistical outliers (IQR / Z-score), arithmetic discrepancies (line items vs total), currency anomalies, and date issues.
 8. **Interactive Split-Screen Verification Queue**: Side-by-side verification interface embedding the original source PDF/image document stream alongside extracted key-value fields.
+9. **API Security & CORS Protection**: API Key authentication (`X-API-Key` & Bearer token) and secure, strict CORS configuration preventing wildcard credential exposure.
 
 ---
 
@@ -159,7 +160,7 @@ Access the dashboard at: `http://localhost:8501`
 
 ## 🧪 Testing & Validation
 
-Run the complete multi-tier pytest suite (515+ tests):
+Run the complete multi-tier pytest suite (303 tests):
 ```bash
 pytest
 ```

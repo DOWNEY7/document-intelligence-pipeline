@@ -16,9 +16,15 @@ import requests
 import streamlit as st
 
 
-def _fetch_invoices(api_base: str, limit: int = 1000) -> list[dict]:
+def _fetch_invoices(api_base: str, limit: int = 1000, api_key: str | None = None) -> list[dict]:
     try:
-        resp = requests.get(f"{api_base}/api/v1/invoices", params={"limit": limit}, timeout=10)
+        headers = {"X-API-Key": api_key} if api_key else None
+        resp = requests.get(
+            f"{api_base}/api/v1/invoices",
+            params={"limit": limit},
+            headers=headers,
+            timeout=10,
+        )
         if resp.status_code == 200:
             return resp.json()
     except Exception:
@@ -26,7 +32,7 @@ def _fetch_invoices(api_base: str, limit: int = 1000) -> list[dict]:
     return []
 
 
-def render_spend_analytics(api_base: str) -> None:
+def render_spend_analytics(api_base: str, api_key: str | None = None) -> None:
     """Render Spend Analytics tab with interactive charts."""
     st.header("📈 Spend Analytics")
 
@@ -38,7 +44,7 @@ def render_spend_analytics(api_base: str) -> None:
         return
 
     with st.spinner("Loading analytics data..."):
-        invoices = _fetch_invoices(api_base)
+        invoices = _fetch_invoices(api_base, api_key=api_key)
 
     if not invoices:
         st.info("No invoice data available. Upload documents via the Live Upload tab.")
