@@ -191,3 +191,15 @@ pytest tests/e2e/              # End-to-end multi-fixture workflows
 | `GET` | `/documents/{document_id}/audit` | Retrieve complete audit trail linking raw & normalized models |
 | `GET` | `/documents/{document_id}/file` | Stream raw source document (PDF/Image) for UI preview |
 | `GET` | `/health` or `/api/v1/health` | Service health status and mock fallback configuration |
+
+### 🔐 Authentication & Ingestion Example (cURL)
+```bash
+# Upload and process an invoice with API key authentication
+curl -X POST "http://localhost:8000/api/v1/upload" \
+  -H "X-API-Key: your-secret-key" \
+  -F "file=@tests/fixtures/sample_invoices/inv_001_standard_aws.pdf"
+
+# Query normalized invoices
+curl -X GET "http://localhost:8000/api/v1/invoices?limit=10" \
+  -H "Authorization: Bearer your-secret-key"
+```
